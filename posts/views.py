@@ -1,11 +1,10 @@
 from django.shortcuts import render
 import requests
-from django.http import HttpResponse
 from . import models
 
 
-def index(request):
-    r = requests.get('http://jsonplaceholder.typicode.com/users')
+def get_users(url):
+    r = requests.get(url)
     users = r.json()
     for user in users:
         newuser = models.PostUser()
@@ -41,16 +40,24 @@ def index(request):
         newuser.company = user_company
         newuser.save()
 
-    return HttpResponse()
+
+def get_posts(url):
+    r = requests.get(url)
+    posts = r.json()
+    for post in posts:
+        new_post = models.Post()
+        user_id = post.get('userId')
+        user = models.PostUser.objects.get(id=user_id)
+        new_post.user = user
+        new_post.id = post.get('id')
+        new_post.title = post.get('title')
+        new_post.body = post.get('body')
+        new_post.save()
 
 
-# def index(request):
-#     r = requests.get('http://jsonplaceholder.typicode.com/users')
-#     users = r.json()
-#     # print(users)
-#     for user in users:
-#         newuser = models.PostUser()
-#         for key, value in user.items():
-#             newuser[key] =
-#             print(key, value)
-#     return HttpResponse()
+def index(request):
+    get_users('http://jsonplaceholder.typicode.com/users')
+    get_posts('http://jsonplaceholder.typicode.com/posts')
+
+    posts = models.Post.objects.all()
+    return render(request, "index.html", {"posts": posts})
