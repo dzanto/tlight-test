@@ -1,6 +1,10 @@
 from django.shortcuts import render
+from django.core import serializers
 import requests
 from . import models
+from django.http import HttpResponse
+import json
+
 
 
 def get_users(url):
@@ -61,3 +65,13 @@ def index(request):
 
     posts = models.Post.objects.all()
     return render(request, "index.html", {"posts": posts})
+
+
+def deser(request):
+    r = requests.get('http://jsonplaceholder.typicode.com/users')
+    users = r.json()
+    # for user in users:
+    #     users = json.loads(users)
+    for user in serializers.deserialize("json", users[0]):
+        user.save()
+    return HttpResponse()
