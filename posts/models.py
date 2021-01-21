@@ -20,7 +20,6 @@ class Address(models.Model):
     geo = models.ForeignKey(Geo, on_delete=models.CASCADE)
 
 
-
 class PostUser(models.Model):
     name = models.CharField(max_length=100)
     username = models.CharField(max_length=100)
@@ -29,6 +28,7 @@ class PostUser(models.Model):
     phone = models.CharField(max_length=50)
     website = models.CharField(max_length=50)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
 
 class Post(models.Model):
     user = models.ForeignKey(PostUser, on_delete=models.CASCADE)
