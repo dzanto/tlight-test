@@ -70,8 +70,12 @@ def index(request):
 def deser(request):
     r = requests.get('http://jsonplaceholder.typicode.com/users')
     users = r.json()
-    # for user in users:
-    #     users = json.loads(users)
-    for user in serializers.deserialize("json", users[0]):
-        user.save()
-    return HttpResponse()
+    for user in users:
+        print(user)
+    # for user in serializers.deserialize("json", users):
+    #     print(user.object.name)
+    # data = serializers.serialize('json', models.PostUser.objects.all())
+    # for user in serializers.deserialize('json', data):
+    #     print(user.object.name)
+    # new_data = serializers.serialize('json', models.PostUser.objects.all())
+    return HttpResponse(users)
