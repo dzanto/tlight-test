@@ -59,5 +59,5 @@ def index(request):
     get_users('http://jsonplaceholder.typicode.com/users')
     get_posts('http://jsonplaceholder.typicode.com/posts')
 
-    posts = models.Post.objects.all()
+    posts = models.Post.objects.select_related('user').all()
     return render(request, "index.html", {"posts": posts})

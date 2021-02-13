@@ -1,12 +1,10 @@
-# tlight-test
-Тестовое задание Tlight
-# Установка и запуск:
+## tlight-test
+Парсит и выводит информацию о пользователях и постах с адресов:
+> http://jsonplaceholder.typicode.com/users
+> http://jsonplaceholder.typicode.com/posts
+### Установка и запуск:
 1. Склонировать репозиторий
-2. Устанавливаем виртуальное окружение `python -m venv venv`
-3. Активируем виртуальное окружение `source venv/Scripts/activate`
-4. Устанавливаем зависимости `pip install -r requirements.txt`
-5. Делаем миграции `python manage.py makemigrations`, `python manage.py migrate`
-6. Запускаем `python manage.py runserver`
-
-
-
+2. Устанавливаем и активируем виртуальное окружение
+3. Устанавливаем зависимости `pip install -r requirements.txt`
+4. Делаем миграции `python manage.py migrate`
+5. Запускаем `python manage.py runserver`
